@@ -1,2 +1,2 @@
-# tstech
+# TsTech
 Test task
