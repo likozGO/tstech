@@ -1,0 +1,148 @@
+@import "../Global/Varibles";
+.section-main {
+  padding-top: $fixed-padding;
+  & > .container {
+    margin-top: 60px;
+  }
+  table {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    border: 2px solid $theme-blue;
+    box-shadow: 0px 0px 5px $white-text-theme;
+    thead th {
+      text-align: center;
+      border: 2px solid $theme-blue;
+      font-size: 1.4em;
+      color: $white-theme;
+      background: $theme-blue;
+    }
+    tbody {
+      min-height: 300px;
+
+      tr {
+        text-align: center;
+        &.table-empty td {
+          height: 160px;
+          align-items: center;
+          justify-content: center;
+          font-weight: 900;
+          text-decoration: none!important;
+          .image-empty {
+            display: block;
+            margin: 20px auto;
+            max-width: 200px;
+            height: auto;
+          }
+        }
+        td {
+          border: 2px solid $theme-blue;
+          padding: 10px;
+          @include selectStyle;
+
+          &:nth-child(1) {
+            width: 10%;
+            font-size: 1.3em;
+            text-decoration: underline;
+          }
+
+          &:nth-child(2) {
+            width: 60%;
+          }
+
+          &:nth-child(3),
+          &:nth-child(4) {
+            width: 15%;
+          }
+
+
+          .sort {
+            border: 0;
+            outline: 0;
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            transition: .2s box-shadow linear;
+
+            &-asc {
+              background-image: url(images/asc.svg);
+            }
+
+            &-desc {
+              background-image: url(images/desc.svg);
+            }
+
+            &:hover {
+              box-shadow: 0 0 2px $white-text-theme;
+            }
+          }
+
+          .delete {
+            border: 0;
+            outline: 0;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            background-color: transparent;
+            background-image: url(images/delete.svg);
+            background-repeat: no-repeat;
+            transition: .2s box-shadow linear;
+
+            &:hover {
+              box-shadow: 0 0 2px $white-text-theme;
+            }
+          }
+        }
+      }
+    }
+  }
+  .button {
+    margin: 20px auto 0 auto;
+    max-width: 280px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    background: $theme-blue;
+    color: $white-theme;
+    border: 0;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: .4em;
+    cursor: pointer;
+    transition: .2s background-color linear,
+                .2s box-shadow linear
+                .2s border-radius linear;
+    border-radius: 5px;
+    &:hover {
+      box-shadow: 0 0 3px $white-text-theme;
+    }
+    &:focus {
+      background: $theme-blue-focus;
+      border-radius: 3px;
+    }
+    &.main-button__add {
+      max-width: 180px;
+      position: relative;
+      padding: 5px 30px 5px 40px;
+      background: transparent;
+      border: 1px solid $green;
+      color: $green;
+      font-size: .9em;
+      margin: 1em 0 0 200px;
+      &:before {
+        content: '';
+        background: url("images/add.svg");
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 15px;
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,27 @@
+@import "Varibles";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  line-height: 1.4;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: $white-text-theme;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}

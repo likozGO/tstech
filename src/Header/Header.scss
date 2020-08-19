@@ -1,0 +1,30 @@
+@import "../Global/Varibles";
+
+header.section-header {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 66px;
+  line-height: 66px;
+  color: $white-theme;
+  background-color: $theme-blue;
+  & > .container {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .section-header__logo {
+    font-weight: 900;
+    font-size: 1.8em;
+    padding: 0 25px;
+    pointer-events: none;
+    text-decoration: none;
+    color: $white-theme;
+  }
+  .section-header__button {
+
+  }
+}
