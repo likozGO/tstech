@@ -108,14 +108,20 @@ class Main extends Component {
 
     sendData = (e) => {
         e.preventDefault();
-        alert('look in console!')
-        let sendedData = JSON.parse(JSON.stringify(this.state.newArray))
-        for (let i = 0; i < sendedData.length; i++) {
-                delete sendedData[i].use
-                sendedData[i].priority = i;
+        function formatingData(order, properthy, priority) {
+            this.order = order;
+            this.properthy = properthy;
+            this.priority = priority;
         }
+        alert('look in console!')
+
+        let sendedData = JSON.parse(JSON.stringify(this.state.newArray))
         console.log(sendedData.length < 1 ? 'There are not elements to send' : 'Here your result')
-        console.table(sendedData)
+        for (let i = 0; i < sendedData.length; i++) {
+            sendedData[i].priority = i
+            let Data = new formatingData(sendedData[i].orderTypeDefault, sendedData[i].title, sendedData[i].priority)
+            console.table(Data)
+        }
     }
 
 
