@@ -35,6 +35,9 @@
             height: auto;
           }
         }
+        &.table-empty.hidden {
+          display: none;
+        }
         td {
           border: 2px solid $theme-blue;
           padding: 10px;
@@ -123,6 +126,9 @@
     &:focus {
       background: $theme-blue-focus;
       border-radius: 3px;
+    }
+    &:disabled {
+      cursor: not-allowed;
     }
     &.main-button__add {
       max-width: 180px;

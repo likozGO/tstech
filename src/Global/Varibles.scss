@@ -40,6 +40,10 @@ $fixed-padding: 66px;
     option {
       font-weight: normal;
       text-align: center;
+      &:disabled {
+        background: #333;
+        color: #fff;
+      }
     }
   }
 }
