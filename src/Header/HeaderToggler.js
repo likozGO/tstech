@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './HeaderToggler.scss'
 
 
-export function HeaderToggler() {
+export function HeaderToggler({getThemeState}) {
+
     return (
-        <div className="toggle-button">
-            <input type="checkbox" id="switch"/>
+        <div className="toggle-button" >
+            <input type="checkbox" id="switch" onClick={() => getThemeState()}/>
             <div className="content">
                 <label htmlFor="switch">
                     <div className="toggle"></div>

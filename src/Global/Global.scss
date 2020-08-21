@@ -17,6 +17,11 @@ body {
   color: $white-text-theme;
 }
 
+#root,
+.theme {
+  height: 100%;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -25,3 +30,42 @@ body {
   max-width: 1160px;
   margin: 0 auto;
 }
+
+.theme {
+  transition: .3s linear;
+  &.theme-dark {
+    background: $black-theme;
+    color: $black-text-theme;
+    header.section-header {
+      background: $black-theme;
+      border: 2px solid $black-theme-border;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+    }
+    .section-main .button.main-button__add {
+      background: $green;
+      color: $black-text-theme;
+
+      &:before {
+        filter: brightness(100);
+      }
+    }
+    .section-main table tbody tr td {
+      .select-style {
+        background: $black-theme;
+        color: $black-text-theme;
+        option:disabled {
+          background: #000;
+          color: $black-text-theme;
+        }
+      }
+
+      .sort,
+      .delete {
+        filter: invert(1);
+      }
+    }
+  }
+}
+

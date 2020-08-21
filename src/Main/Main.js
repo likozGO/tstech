@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import './Main.scss'
-import imgEmpty from './images/empty.svg'
 import tableInfo from "../data";
+import EmptyRow from "./MainEmptyRow";
+import Row from "./MainRow";
 
 
 class Main extends Component {
@@ -27,7 +28,6 @@ class Main extends Component {
     }
 
     deleteNewRow = (deleteIndex, number) => {
-        alert(number);
         const copyArrayObj = [...this.state.objectArray];
         let copyArrayNew = [...this.state.newArray];
         delete copyArrayObj[number].use;
@@ -48,7 +48,6 @@ class Main extends Component {
     }
 
     addNewRow = (number, change = false, RowIndex) => {
-        console.log('addNewRow')
         const copyArrayObj = [...this.state.objectArray];
         const copyArrayNew = [...this.state.newArray];
         copyArrayObj[number].use = 'use';
@@ -62,13 +61,11 @@ class Main extends Component {
                 ],
             }))
         } else {
-            console.log(RowIndex)
             delete copyArrayNew[RowIndex].use;
             copyArrayNew.splice(RowIndex, 1)
             this.setState(prevState => ({
                 objectArray: copyArrayObj,
-                newArray: [...copyArrayNew, copyArrayObj[number]],
-                GG: [copyArrayObj[number]]
+                newArray: [copyArrayObj[number], ...copyArrayNew],
             }))
         }
 
@@ -76,12 +73,11 @@ class Main extends Component {
     }
 
     changeRow = (prevVal, newVal, RowIndex) => {
-        console.log('change row');
         const copyArrayObj = [...this.state.objectArray];
         const copyArrayNew = [...this.state.newArray];
 
         for (let i = 0; i < copyArrayObj.length; i++) {
-            if (copyArrayObj[i].name ===  newVal) {
+            if (copyArrayObj[i].name === newVal) {
                 this.addNewRow(i, true, RowIndex);
             }
         }
@@ -110,8 +106,21 @@ class Main extends Component {
         this.getNotUsedRow()
     }
 
+    sendData = (e) => {
+        e.preventDefault();
+        alert('look in console!')
+        let sendedData = JSON.parse(JSON.stringify(this.state.newArray))
+        for (let i = 0; i < sendedData.length; i++) {
+                delete sendedData[i].use
+                sendedData[i].priority = i;
+        }
+        console.log(sendedData.length < 1 ? 'There are not elements to send' : 'Here your result')
+        console.table(sendedData)
+    }
+
 
     render() {
+        const availibleAdd = this.state.availibleParams.length;
         return (
             <main className="section-main">
                 <div className="container">
@@ -140,66 +149,16 @@ class Main extends Component {
                         }
                         </tbody>
                     </table>
-                    <button type="button" className="button main-button__add"
-                            disabled={this.state.availibleParams.length === 0}
-                            onClick={() => this.addNewRow(this.state.availibleParams[0])}>Add property
+                    <button type="button" className={`button main-button__add ${availibleAdd ? '' : "main-button__block"}`}
+                            disabled={availibleAdd === 0}
+                            onClick={() => this.addNewRow(this.state.availibleParams[0])}>
+                        {availibleAdd ? 'Add new item' : 'No available items'}
                     </button>
-                    <form>
-                        {/*Show send data*/}
-                        <button type="submit" className="button main-button__sort">Sort</button>
-                    </form>
+                    <button type="submit" className="button main-button__sort" onClick={(e) => this.sendData(e)}>Sort</button>
                 </div>
             </main>
         );
     }
 }
-
-const EmptyRow = () => (
-    <tr className="table-empty">
-        <td colSpan={4}>
-            TABLE IS EMPTY <br/>
-            <img src={imgEmpty} alt="Table empty" className="image-empty"/>
-        </td>
-    </tr>
-);
-
-const Row = ({RowIndex, RowItem, initArray, newArray, changeRow, deleteNewRow, sortMethod}) => {
-    const checkIndexName = RowItem ? RowItem.name : '';
-    const [prevVal, setPrevVal] = React.useState('')
-    const handleChange = (e) => {
-        changeRow(prevVal, e.target.value, RowIndex)
-        setPrevVal(e.target.value)
-    }
-
-    return (
-        <tr className={RowIndex}>
-            <td>{RowItem.name}</td>
-            <td>
-                <select value={RowItem.name} className="select-style"
-                        onChange={(e) => handleChange(e)} onClick={(e) => setPrevVal(e.target.value)}
-                >
-                    <option disabled={RowItem.name}
-                            value={RowItem.name}
-                    >
-                        {RowItem.title}
-                    </option>
-                    {
-                        initArray.filter(elemm => !elemm.use).map((a, indx) =>
-                            <option key={indx} value={a.name}>{a.title}</option>
-                        )
-                    }
-                </select>
-            </td>
-            <td>
-                <button type="button" className={`sort sort-${RowItem.orderTypeDefault.toLowerCase()}`}
-                        title={RowItem.orderTypeDefault} onClick={() => sortMethod(RowItem.priority)}/>
-            </td>
-            <td>
-                <button type="button" className="delete" title="Delete item"
-                        onClick={() => deleteNewRow(RowIndex, RowItem.priority)}/>
-            </td>
-        </tr>
-    )
-};
 
 export default Main;
